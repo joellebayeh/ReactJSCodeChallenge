@@ -1,0 +1,11 @@
+.Navbar {
+  background-color: rgb(75, 0, 85);
+  width: 100%;
+  height: 80px;
+  font-family: "Segoe Print";
+  display: flex;
+}
+
+.Navbar .leftside {
+    flex: 50%,
+}

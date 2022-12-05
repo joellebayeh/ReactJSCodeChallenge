@@ -9,6 +9,7 @@ function httpReducer(state, action) {
     };
   }
   if (action.type === "SUCCESS") {
+    console.log("in SUCCES")
     return {
       data: action.responseData,
       error: null,
@@ -25,7 +26,7 @@ function httpReducer(state, action) {
   return state;
 }
 
-function useHttp(requestFunction, startWithPending = false) {
+function useHttp(requestFunction, startWithPending) {
   const [httpState, dispatch] = useReducer(httpReducer, {
     loading: startWithPending,
     data: null,
@@ -36,8 +37,9 @@ function useHttp(requestFunction, startWithPending = false) {
       dispatch({ type: "SEND" });
       try {
         const responseData = await requestFunction(requestData);
-        console.log("try")
+        console.log("tr",JSON.stringify(responseData))
         dispatch({ type: "SUCCESS", responseData });
+        console.log("inside my http hook",responseData);
       } catch (error) {
         console.log("catch")
         dispatch({
