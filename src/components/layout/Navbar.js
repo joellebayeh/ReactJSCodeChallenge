@@ -1,3 +1,7 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import {
   AppBar,
   Typography,
@@ -6,26 +10,19 @@ import {
   InputBase,
   Button,
 } from "@mui/material";
-import "./Navbar.css";
-import ArticleIcon from "@mui/icons-material/Article";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useDispatch } from "react-redux";
-import { loginActions } from "../../store/slices/login-slice";
-import { useHistory } from "react-router-dom";
-import { articleActions } from "../../store/slices/article-slice";
 import SearchIcon from "@mui/icons-material/Search";
+import ArticleIcon from "@mui/icons-material/Article";
+
+import "./Navbar.css";
+import { loginActions } from "../../store/slices/login-slice";
+import { articleActions } from "../../store/slices/article-slice";
+
 
 const StyledToolbar = styled(Toolbar)({
   diaplay: "flex",
   justifyContent: "space-between",
 });
-
-// const Search = styled("div")(({ theme }) => ({
-//   backgroundColor: "antiquewhite",
-//   padding: "0 3px",
-//   borderRadius: theme.shape.borderRadius,
-//   width: "20%",
-// }));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -74,7 +70,7 @@ const Navbar = (props) => {
   const logoutHandler = () => {
     dispatch(loginActions.logOut());
     localStorage.removeItem("token");
-    history.push("/");
+    history.replace("/");
   };
 
   const searchHandler = (event) => {
@@ -109,6 +105,7 @@ const Navbar = (props) => {
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
+            disabled={props.articles.length === 0 ? true : false}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
             onChange={searchHandler}

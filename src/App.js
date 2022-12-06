@@ -1,7 +1,11 @@
-import "./App.css";
+import React from "react";
 import { Route, BrowserRouter,Switch } from "react-router-dom";
-import LoginForm from "./pages/Login/LoginForm";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import "./App.css";
+
+import LoginForm from "./screens/Login/LoginForm";
+import Dashboard from "./screens/Dashboard/Dashboard";
+
+
 
 const App = () => {
   return (

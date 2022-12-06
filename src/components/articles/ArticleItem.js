@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Grid,
   Card,
@@ -9,6 +11,7 @@ import {
 } from "@mui/material";
 
 import "./ArticleItem.css";
+
 
 const ArticleItem = (props) => {
   return (
@@ -31,13 +34,6 @@ const ArticleItem = (props) => {
             >
               {props.title}
             </Typography>
-            {/* <Typography
-              variant="body2"
-              sx={{ fontSize: 13, mb: 1.5 }}
-              color="initial"
-              
-            >
-            </Typography> */}
             <Typography
               variant="subtitle2"
               sx={{ mb: 1.5, fontFamily: "Segoe Print" }}
@@ -45,15 +41,12 @@ const ArticleItem = (props) => {
             >
               description
             </Typography>
-            {/* <Typography variant="body2" sx={{ fontFamily: "Calibri" }}>
-              <div className="scrollD">{props.description}</div>
-            </Typography> */}
             <Typography
               variant="body1"
               component="div"
               sx={{ fontFamily: "Calibri", overflow: "auto" }}
-            ><div className="scrollD">{props.description}</div>
-              {/* {props.description} */}
+            >
+              <div className="scrollD">{props.description}</div>
             </Typography>
           </CardContent>
           <Typography

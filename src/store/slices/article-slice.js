@@ -4,16 +4,29 @@ const articleSlice = createSlice({
   name: "article",
   initialState: {
     articles: [],
-    filterArticles: [],
-    searchInput: "",
+    articlesFiltredByQuery: [],
+    searchInputField: "",
+    articleStatus: "",
+    error: null,
+    loading: false,
+    checkedEmpty: [],
   },
   reducers: {
-    allArticles(state, action) {
-      state.articles = action.payload;
-      console.log("in slice", { ...state }, action.payload);
+    articlesReq(state) {
+      state.loading = true;
+    },
+    allArticlesSuccess(state, action) {
+      state.loading = false;
+      state.articleStatus = "success";
+      state.checkedEmpty = action.payload;
+      state.articles = [...state.articles, ...action.payload];
+    },
+    allArticlesFailed(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+      state.articleStatus = "failed";
     },
     searchArticles(state, action) {
-      console.log(action.payload);
       state.searchInput = action.payload;
       state.filterArticles = state.articles.filter((article) => {
         return (
@@ -27,7 +40,6 @@ const articleSlice = createSlice({
             .match(action.payload.toString().toLowerCase())
         );
       });
-      console.log(state.filterArticles);
     },
   },
 });
